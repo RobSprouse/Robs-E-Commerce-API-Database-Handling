@@ -128,3 +128,11 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# folder where temp dev files are stored
+/workingFiles
+
+# from Develop folder
+node_modules
+.env
+.DS_Store
