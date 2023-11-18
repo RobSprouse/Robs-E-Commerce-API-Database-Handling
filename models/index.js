@@ -15,11 +15,11 @@ const ProductTag = require("./ProductTag");
           `Tag` belongs to many `Product` models. Allow products to have multiple tags and tags to have many products by using the `ProductTag` through model  Make sure you set up foreign key relationships that match the column we created in the respective models.*/
 
 Product.belongsTo(Category, {
-     foreignKey: "Category_id",
+     foreignKey: "category_id",
 });
 
 Category.hasMany(Product, {
-     foreignKey: "Category_id",
+     foreignKey: "category_id",
 });
 
 Product.belongsToMany(Tag, {

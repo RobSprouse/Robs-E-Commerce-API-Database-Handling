@@ -39,8 +39,20 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
      /* TODO: 
-          [x]:  create a new tag */
+          [x]:  create a new tag
+          [x]: doesn't allow for multiple tag names that are the same
+          [x]: doesn't allow for blank input */
      try {
+          const tagName = req.body.tag_name.toLowerCase();
+          if (tagName === "") {
+               res.status(400).json({ message: "Please enter a tag name!" });
+               return;
+          }
+          const existingTag = await Tag.findOne({ where: { tag_name: tagName } });
+          if (existingTag) {
+               res.status(400).json({ message: "Tag name already exists!" });
+               return;
+          }
           const tagData = await Tag.create(req.body);
           res.status(201).json(tagData);
      } catch (err) {
@@ -50,8 +62,20 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
      /* TODO: 
-          [x]: update a tag's name by its `id` value */
+          [x]: update a tag's name by its `id` value
+          [x]: doesn't allow for multiple tag names that are the same
+          [x]: doesn't allow for blank input */
      try {
+          const tagName = req.body.tag_name.toLowerCase();
+          if (tagName === "") {
+               res.status(400).json({ message: "Please enter a tag name!" });
+               return;
+          }
+          const existingTag = await Tag.findOne({ where: { tag_name: tagName } });
+          if (existingTag) {
+               res.status(400).json({ message: "Tag name already exists!" });
+               return;
+          }
           const tagData = await Tag.update(req.body, {
                where: {
                     id: req.params.id,
