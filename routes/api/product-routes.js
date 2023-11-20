@@ -1,13 +1,11 @@
+// COMMENT:imports the required modules
 const router = require("express").Router();
 const { Product, Category, Tag, ProductTag } = require("../../models");
 
-// The `/api/products` endpoint
+// COMMENT: The `/api/products` endpoint
 
-// get all products
+// COMMENT: get all products
 router.get("/", async (req, res) => {
-     /* TODO: 
-          [x]: find all products
-          [x]: be sure to include its associated Category and Tag data */
      try {
           const productData = await Product.findAll({
                include: [{ model: Category }, { model: Tag }],
@@ -18,11 +16,8 @@ router.get("/", async (req, res) => {
      }
 });
 
-// get one product
+// COMMENT: get one product
 router.get("/:id", async (req, res) => {
-     /* TODO: 
-          [x]: find a single product by its `id`
-          [x]: be sure to include its associated Category and Tag data */
      try {
           const productData = await Product.findByPk(req.params.id, {
                include: [{ model: Category }, { model: Tag }],
@@ -37,15 +32,8 @@ router.get("/:id", async (req, res) => {
      }
 });
 
-// create new product
+// COMMENT: create new product
 router.post("/", async (req, res) => {
-     /* TODO: 
-          // [x]: Make this async
-          // [x]: Can't make more than one of the same product_name
-          // [x]: Ensure product_name, price, stock ins't null
-          // [x]: Check to see if leaving category and tagIds blank works
-          // [x]: check README for requirements regarding this ^ */
-
      try {
           // Check if all necessary properties are present and not empty
           if (!req.body.product_name || !req.body.price || !req.body.stock) {
@@ -90,23 +78,8 @@ router.post("/", async (req, res) => {
      }
 });
 
-// update product
+// COMMENT: update a category by its `id` value
 router.put("/:id", async (req, res) => {
-     /* TODO: 
-          // [x]:  Make this async
-          // [x]: Check to see if one thing can be updated per item, leaving out the rest
-          // [x]: check README for requirements regarding this ^
-          // [x]: Can't change the name of a product to one that already exists
-          req.body should look like this...
-          {
-            product_name: "Basketball",
-            price: 200.00,
-            stock: 3,
-            tagIds: [1, 2, 3, 4]
-            category_id: 1
-          } */
-
-     // update product data
      try {
           const existingProduct = await Product.findOne({ where: { product_name: req.body.product_name } });
           if (existingProduct) {
@@ -158,9 +131,8 @@ router.put("/:id", async (req, res) => {
      }
 });
 
+// COMMENT: delete a category by its `id` value
 router.delete("/:id", async (req, res) => {
-     /* TODO: 
-          [x]: delete one product by its `id` value */
      try {
           const productData = await Product.destroy({
                where: {
@@ -177,4 +149,5 @@ router.delete("/:id", async (req, res) => {
      }
 });
 
+// COMMENT: Exports modules
 module.exports = router;

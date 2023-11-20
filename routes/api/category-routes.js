@@ -1,12 +1,11 @@
+// COMMENT: imports required modules
 const router = require("express").Router();
 const { Category, Product } = require("../../models");
 
-// The `/api/categories` endpoint
+// COMMENT: The `/api/categories` endpoint file
 
+// COMMENT: get all categories
 router.get("/", async (req, res) => {
-     /* TODO: 
-          [x]: find all categories
-          [x]: be sure to include its associated Products */
      try {
           const categoryData = await Category.findAll({
                include: [{ model: Product }],
@@ -17,10 +16,8 @@ router.get("/", async (req, res) => {
      }
 });
 
+// COMMENT: get one category
 router.get("/:id", async (req, res) => {
-     /* TODO: 
-          [x]: find one category by its `id` value
-          [x]: be sure to include its associated Products */
      try {
           const categoryData = await Category.findByPk(req.params.id, {
                include: [{ model: Product }],
@@ -35,11 +32,8 @@ router.get("/:id", async (req, res) => {
      }
 });
 
+// COMMENT: create a new category
 router.post("/", async (req, res) => {
-     /* TODO: 
-          [x]: create a new category
-          [x] doesn't allow for multiple category names that are the same
-          [x]: doesn't allow for blank input */
      try {
           const categoryName = req.body.category_name.toLowerCase();
           if (categoryName === "") {
@@ -51,18 +45,15 @@ router.post("/", async (req, res) => {
                res.status(400).json({ message: "Category name already exists!" });
                return;
           }
-        const categoryData = await Category.create(req.body);
-        res.status(201).json(categoryData);
+          const categoryData = await Category.create(req.body);
+          res.status(201).json(categoryData);
      } catch (err) {
           res.status(400).json(err);
      }
 });
 
+// COMMENT: update a category by its `id` value
 router.put("/:id", async (req, res) => {
-     /* TODO: 
-          [x]: update a category by its `id` value
-          [x] doesn't allow for multiple category names that are the same 
-          [x]: doesn't allow for blank input */
      try {
           const categoryName = req.body.category_name.toLowerCase();
           if (categoryName === "") {
@@ -77,7 +68,7 @@ router.put("/:id", async (req, res) => {
           const categoryData = await Category.update(req.body, {
                where: {
                     id: req.params.id,
-               }, 
+               },
           });
           if (!categoryData[0]) {
                res.status(404).json({ message: "No category found with that id!" });
@@ -89,9 +80,8 @@ router.put("/:id", async (req, res) => {
      }
 });
 
+// COMMENT: delete a category by its `id` value
 router.delete("/:id", async (req, res) => {
-     /* TODO: 
-          [x]: delete a category by its `id` value */
      try {
           const categoryData = await Category.destroy({
                where: {
@@ -108,4 +98,5 @@ router.delete("/:id", async (req, res) => {
      }
 });
 
+// COMMENT: export router
 module.exports = router;

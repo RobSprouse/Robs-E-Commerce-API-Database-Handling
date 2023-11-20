@@ -1,5 +1,7 @@
+// COMMENT: imports the required module
 const { ProductTag } = require('../models');
 
+// COMMENT: product tag data to seed the ProductTag model
 const productTagData = [
   {
     product_id: 1,
@@ -51,6 +53,8 @@ const productTagData = [
   },
 ];
 
+// COMMENT: creates a function to seed the ProductTag model with the productTagData array
 const seedProductTags = () => ProductTag.bulkCreate(productTagData);
 
+// COMMENT: export the seedProductTags function
 module.exports = seedProductTags;

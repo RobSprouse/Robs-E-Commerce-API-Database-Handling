@@ -1,19 +1,10 @@
-// import models
+// COMMENT: imports required modules
 const Product = require("./Product");
 const Category = require("./Category");
 const Tag = require("./Tag");
 const ProductTag = require("./ProductTag");
 
-/* TODO:
-     [x]: 
-          * `Product` belongs to `Category`, and 
-     [x]: 
-          `Category` has many `Product` models, as a category can have multiple products but a product can only belong to one category.
-     [x]: 
-          * `Product` belongs to many `Tag` models, and .
-     [x]: 
-          `Tag` belongs to many `Product` models. Allow products to have multiple tags and tags to have many products by using the `ProductTag` through model  Make sure you set up foreign key relationships that match the column we created in the respective models.*/
-
+// COMMENT: Sets up associations between models
 Product.belongsTo(Category, {
      foreignKey: "category_id",
 });
@@ -33,7 +24,7 @@ Tag.belongsToMany(Product, {
 });
 
 
-
+// COMMENT: Export modules
 module.exports = {
      Product,
      Category,
