@@ -73,22 +73,24 @@ router.post("/", async (req, res) => {
           // if no product tags, just respond
           res.status(200).json(`${productName} has been added to the database!`);
      } catch (err) {
-          // console.log(err);
           res.status(400).json(err);
      }
 });
 
-// COMMENT: update a category by its `id` value
+// COMMENT: update a product by its `id` value
 router.put("/:id", async (req, res) => {
      try {
-          const existingProduct = await Product.findOne({ where: { product_name: req.body.product_name } });
-          if (existingProduct) {
-               res.status(400).json({
-                    message: "Product name already exists!",
-                    product_name: existingProduct.product_name,
-                    id: existingProduct.id,
-               });
-               return;
+          const existingProduct = await Product.findOne({ where: { id: req.params.id } });
+          if (req.body.product_name && existingProduct.product_name !== req.body.product_name) {
+               const productExists = await Product.findOne({ where: { product_name: req.body.product_name } });
+               if (productExists) {
+                    res.status(400).json({
+                         message: "Product name already exists!",
+                         product_name: productExists.product_name,
+                         id: productExists.id,
+                    });
+                    return;
+               }
           }
 
           const product = await Product.update(req.body, {
@@ -96,6 +98,7 @@ router.put("/:id", async (req, res) => {
                     id: req.params.id,
                },
           });
+
           if (req.body.tagIds && req.body.tagIds.length) {
                const productTags = await ProductTag.findAll({
                     where: { product_id: req.params.id },
@@ -126,12 +129,11 @@ router.put("/:id", async (req, res) => {
 
           return res.json(product);
      } catch (err) {
-          // console.log(err);
           res.status(400).json(err);
      }
 });
 
-// COMMENT: delete a category by its `id` value
+// COMMENT: delete a product by its `id` value
 router.delete("/:id", async (req, res) => {
      try {
           const productData = await Product.destroy({
