@@ -51,12 +51,9 @@ This application requires Node.js to run. Please visit https://nodejs.org/en/ to
 This application depends on connecting to an existing MySql server, either locally or over the internet. Please visit https://dev.mysql.com/downloads/mysql/ to download MySQL if it is not already installed on your computer. Once you have the ability to connect to a hosted MySql server, you can modify the connection parameters in the `db/connection.js` if the default installation of MySQL wasn't chosen. This application is set up to pull the database login information from a `.env` file. The `./.env` file is not included in this repository because the upload of it is ignored in the .gitignore file. This is intentional to prevent login credentials from being uploaded to Github, however, there is an example `env.EXAMPLE` file provided. You can rename this file to `.env` and modify the parameters to match your MySql server login information. The following parameters are required in the `.env` file:
 
 ```html
-DB_NAME='ecommerce_db'
-<!-- Database name, this application relies on this being the database name -->
-DB_USER='username'
-<!-- Username used to connect to the MySQL database -->
-DB_PASSWORD='password'
-<!-- Password used to connect to the MySQL database -->
+`DB_NAME='ecommerce_db' <!-- Database name, this application relies on this being the database name -->`
+`DB_USER='username' <!-- Username used to connect to the MySQL database -->`
+`DB_PASSWORD='password' <!-- Password used to connect to the MySQL database -->`
 ```
 
 If you are unfamiliar with cloning a repository, please click on the following link to learn: [Github docs | Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
