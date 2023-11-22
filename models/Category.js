@@ -1,29 +1,11 @@
+// COMMENT: imports required modules
 const { Model, DataTypes } = require("sequelize");
-
 const sequelize = require("../config/connection.js");
 
-/* TODO: 
-     // [x]: 
-      * `Category`
-      
-        * `id`
-      
-          * Integer.
-        
-          * Doesn't allow null values.
-        
-          * Set as primary key.
-        
-          * Uses auto increment.
-      
-        * `category_name`
-        
-          * String.
-        
-          * Doesn't allow null values. */
-
+// COMMENT: Initializes the Category model (table) by extending off Sequelize's Model class
 class Category extends Model {}
 
+// COMMENT: Sets up fields and rules for Category model
 Category.init(
      {
           id: {
@@ -46,4 +28,5 @@ Category.init(
      }
 );
 
+// COMMENT: Exports the Category model for use in other files
 module.exports = Category;

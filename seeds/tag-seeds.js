@@ -1,5 +1,7 @@
+// COMMENT: imports the required module
 const { Tag } = require('../models');
 
+// COMMENT: create an array of objects to seed the Tag model
 const tagData = [
   {
     tag_name: 'rock music',
@@ -27,6 +29,8 @@ const tagData = [
   },
 ];
 
+// COMMENT: creates a function to seed the Tag model with the tagData array
 const seedTags = () => Tag.bulkCreate(tagData);
 
+// COMMENT: export the seedTags function
 module.exports = seedTags;

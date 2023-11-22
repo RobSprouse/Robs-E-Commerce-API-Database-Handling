@@ -1,5 +1,5 @@
 {
-     "name": "module-13-challenge-orm",
+     "name": "robs-e-commerce-api-database-handling",
      "version": "1.0.0",
      "description": "",
      "main": "server.js",
@@ -11,10 +11,16 @@
      },
      "repository": {
           "type": "git",
-          "url": ""
+          "url": "git@github.com:RobSprouse/Rob-s-SQL-Employee-Tracker.git"
      },
-     "keywords": [],
-     "author": "",
+     "keywords": [
+          "e-commerce",
+          "node",
+          "express",
+          "mysql",
+          "sequelize"
+     ],
+     "author": "RobSprouse",
      "license": "MIT",
      "devDependencies": {
           "nodemon": "^2.0.3"

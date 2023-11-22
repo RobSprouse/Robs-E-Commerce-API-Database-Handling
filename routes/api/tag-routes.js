@@ -1,14 +1,11 @@
+// COMMENT: imports the required modules
 const router = require("express").Router();
 const { Tag, Product, ProductTag } = require("../../models");
 
-// The `/api/tags` endpoint
+// COMMENT: The `/api/tags` endpoint
 
+// COMMENT: get all tags
 router.get("/", async (req, res) => {
-     /* TODO: 
-          [x]: 
-           // find all tags
-          [x]: 
-            // be sure to include its associated Product data */
      try {
           const tagData = await Tag.findAll({
                include: [{ model: Product }],
@@ -19,10 +16,8 @@ router.get("/", async (req, res) => {
      }
 });
 
+// COMMENT: get one tag by its `id` value
 router.get("/:id", async (req, res) => {
-     /* TODO: 
-           [x]: // find a single tag by its `id`
-           [x]: // be sure to include its associated Product data */
      try {
           const tagData = await Tag.findByPk(req.params.id, {
                include: [{ model: Product }],
@@ -37,11 +32,8 @@ router.get("/:id", async (req, res) => {
      }
 });
 
+// COMMENT: create a new tag
 router.post("/", async (req, res) => {
-     /* TODO: 
-          [x]:  create a new tag
-          [x]: doesn't allow for multiple tag names that are the same
-          [x]: doesn't allow for blank input */
      try {
           const tagName = req.body.tag_name.toLowerCase();
           if (tagName === "") {
@@ -60,11 +52,8 @@ router.post("/", async (req, res) => {
      }
 });
 
+// COMMENT: update a tag's name by its `id` value
 router.put("/:id", async (req, res) => {
-     /* TODO: 
-          [x]: update a tag's name by its `id` value
-          [x]: doesn't allow for multiple tag names that are the same
-          [x]: doesn't allow for blank input */
      try {
           const tagName = req.body.tag_name.toLowerCase();
           if (tagName === "") {
@@ -91,9 +80,8 @@ router.put("/:id", async (req, res) => {
      }
 });
 
+// COMMENT: delete on tag by its `id` value
 router.delete("/:id", async (req, res) => {
-     /* TODO: 
-          // [x]: delete on tag by its `id` value */
      try {
           const tagData = await Tag.destroy({
                where: {
@@ -110,4 +98,5 @@ router.delete("/:id", async (req, res) => {
      }
 });
 
+// COMMENT: export router
 module.exports = router;
